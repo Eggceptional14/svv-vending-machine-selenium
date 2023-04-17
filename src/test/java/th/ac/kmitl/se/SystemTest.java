@@ -128,4 +128,35 @@ public class SystemTest {
 
         driver.quit();
     }
+    
+    @Test
+    public void test_flow_3() throws InterruptedException{
+        System.out.println("Test 3");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("start")));
+        driver.findElement(By.id("start")).click();
+        wait.until(ExpectedConditions.urlToBe("https://fekmitl.pythonanywhere.com/kratai-bin/order"));
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("add_tum_thai")));
+        driver.findElement(By.id("add_tum_thai")).click();
+
+        driver.findElement(By.name("btn_check_out")).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("btn_confirm")));
+        driver.findElement(By.name("btn_confirm")).click();
+        Thread.sleep(1000);
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("btn_pay")));
+        driver.findElement(By.name("btn_pay")).click();
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("btn_pay")));
+        driver.findElement(By.name("btn_pay")).click();
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("btn_pay")));
+        driver.findElement(By.name("btn_pay")).click();
+        Thread.sleep(1000);
+
+        driver.quit();
+    }
 }
