@@ -123,7 +123,6 @@ public class SystemTest {
         Thread.sleep(1000);
 
         wait.until(ExpectedConditions.elementToBeClickable(By.tagName("img")));
-        WebElement imageTumThaiElement = driver.findElement(By.className("ImgTumThai"));
 
         Thread.sleep(1000*12);
 
