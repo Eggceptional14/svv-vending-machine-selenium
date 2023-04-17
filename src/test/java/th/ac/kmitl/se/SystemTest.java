@@ -7,6 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.Duration;
+import java.util.List;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.safari.SafariDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -31,8 +34,71 @@ public class SystemTest {
     }
 
     @Test
-    public void test1() {
+    public void test_flow_1() throws InterruptedException{
         System.out.println("Test 1");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("start")));
+        driver.findElement(By.id("start")).click();
+        wait.until(ExpectedConditions.urlToBe("https://fekmitl.pythonanywhere.com/kratai-bin/order"));
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("add_tum_thai")));
+        driver.findElement(By.id("add_tum_thai")).click();
+        driver.findElement(By.id("add_tum_thai")).click();
+        driver.findElement(By.id("add_tum_thai")).click();
+        driver.findElement(By.id("add_tum_thai")).click();
+
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+        Thread.sleep(1000);
+
+        driver.findElement(By.name("btn_check_out")).click();
+        Thread.sleep(1000);
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("btn_change")));
+        driver.findElement(By.name("btn_change")).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("btn_cancel")));
+        driver.findElement(By.name("btn_cancel")).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("start")));
+        driver.findElement(By.id("start")).click();
+        wait.until(ExpectedConditions.urlToBe("https://fekmitl.pythonanywhere.com/kratai-bin/order"));
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("add_tum_thai")));
+        driver.findElement(By.id("add_tum_thai")).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("add_tum_poo")));
+        driver.findElement(By.id("add_tum_poo")).click();
+
+        driver.findElement(By.name("btn_check_out")).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("btn_confirm")));
+        driver.findElement(By.name("btn_confirm")).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("btn_pay")));
+        driver.findElement(By.name("btn_pay")).click();
+        Thread.sleep(1000);
+
+        WebElement txtCreditCardNum = driver.findElement(By.name("txt_credit_card_num"));
+        WebElement txtNameOnCard = driver.findElement(By.name("txt_name_on_card"));
+        txtCreditCardNum.sendKeys("1234567890");
+        txtNameOnCard.sendKeys("MR JOHN DOE");
+        driver.findElement(By.name("btn_pay")).click();
+        Thread.sleep(1000);
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.tagName("img")));
+        WebElement imageTumThaiElement = driver.findElement(By.className("ImgTumThai"));
+        WebElement imageTumPooElement = driver.findElement(By.className("ImgTumPoo"));
+
+        imageTumPooElement.click();
+        imageTumThaiElement.click();
+
+        driver.quit();
+    }
+
+    @Test
+    public void test_flow_2() throws InterruptedException {
         
     }
 }
